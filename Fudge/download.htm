@@ -1,0 +1,664 @@
+
+
+			<!DOCTYPE html>
+<html>
+<head>
+	<title>Flickr</title>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	
+	<meta name="robots" content="noarchive">
+
+		<link rel="shortcut icon" type="image/ico" href="https://s.yimg.com/pw/favicon.ico" />
+		<link href="/apple-touch-icon.png" rel="apple-touch-icon-precomposed">
+	<link href="https://s.yimg.com/pw/css/c_s_iphone.css.v279650499.37" rel="stylesheet" type="text/css">
+	<link href="https://s.yimg.com/pw/css/c_s_iphone-retina.css.v2056358103.37" rel="stylesheet" type="text/css" media="only screen and (-webkit-min-device-pixel-ratio: 1.5)">
+	
+			<script>
+		
+(function(wipe_msg, root_url, bust_image_search, is_debug) {
+
+var w=window,d=document,top_loc=top.location,self_loc=self.location,referrer=d.referrer,flickr_regex=/^[A-Za-z]+:\/{2,3}(?:[0-9\-A-Za-z]+\.)*flickr\.(?:(?:com)|(?:net))(?::\d+)?(?:\/[^?#]*)?(?:\?[^#]*)?(?:#.*)?$/i,self_is_offline=(self_loc.protocol&&self_loc.protocol.indexOf('http')<0),self_is_flickr=flickr_regex.test(self_loc),self_url=self_is_flickr?self_loc.href:root_url+'/',photo_page_re_result=self_is_flickr&&/\/photos\/[^\/]+\/(\d+)/i.exec(self_loc.pathname),photo_id=photo_page_re_result&&parseInt(photo_page_re_result[1],10),frame_whitelist_regex=/^[A-Za-z]+:\/{2,3}(?:[0-9\-A-Za-z]+\.)*(?:(?:flickr\.(?:(?:com)|(?:net)))|(?:yahoo\.(?:(?:com)|(?:net)|(?:(?:com?\.)?[A-Za-z]{2})))|(?:creativecommons\.org)|(?:eyewonderlabs\.com)|(?:stumbleupon\.com)|(?:screenqueri\.es)|(?:su\.pr)|(?:bing\.com)|(?:bingj\.com)|(?:webcache\.googleusercontent\.com)|(?:google\.(?:(?:com)|(?:(?:com?\.)?[A-Za-z]{2}))))(?::\d+)?(?:\/[^?#]*)?(?:\?[^#]*)?(?:#.*)?$/i,self_whitelist_regex=/^[A-Za-z]+:\/{2,3}(?:[0-9\-A-Za-z]+\.)*(?:(?:flickr\.(?:(?:com)|(?:net)))|(?:yahoo\.(?:(?:com)|(?:net)|(?:(?:com?\.)?[A-Za-z]{2})))|(?:translate\.google\.com)|(?:translate\.googleusercontent\.com)|(?:web\.archive\.org))(?::\d+)?(?:\/[^?#]*)?(?:\?[^#]*)?(?:#.*)?$/i,image_search_regex=/^[A-Za-z]+:\/{2,3}(?:[0-9\-A-Za-z]+\.)*(?:(?:(?:google)|(?:bing))\.(?:(?:com)|(?:(?:com?\.)?[A-Za-z]{2})))(?::\d+)?(?:\/[^?#]*)?(?:\?[^#]*)?(?:#.*)?$/i,referrer_is_flickr=flickr_regex.test(referrer),referrer_is_whitelisted=frame_whitelist_regex.test(referrer),referrer_is_image_search=image_search_regex.test(referrer),faq_url=root_url+'/frame_redir.gne?source='+encodeURIComponent(referrer)+'&dest='+encodeURIComponent(root_url+'/help/blogging/#1392237'),redir_url=root_url+'/frame_redir.gne?source='+encodeURIComponent(referrer)+'&dest='+encodeURIComponent(self_url),should_bust,should_wipe,base;function redirect(){w.onerror=function(){return true;};if(typeof top_loc.replace==='function'){top_loc.replace(redir_url);}else{top_loc.href=redir_url;}} function wipe(){var logo_w,font_size,win_width,html,msg;w.onerror=function(){return true;};logo_w=162;font_size='12px';d.head.parentNode.removeChild(d.head);setInterval(function(){if(d&&d.body){if(d.body.lastChild&&d.body.lastChild.className&&d.body.lastChild.className==='wipe-msg'){}else{msg=wipe_msg.replace('{url}',redir_url).replace('{faq}',faq_url);if(typeof w.innerWidth==='number'){win_width=w.innerWidth;}else if(d.body.clientWidth){win_width=d.body.clientWidth;} if(win_width&&win_width<162){logo_w=win_width;font_size='10px';} html='<div class="wipe-msg" style="font-size:'+font_size+';text-align:left;"><div style="margin-bottom:3px;"><img alt="Flickr" width="'+logo_w+'" src="https://s.yimg.com/pw/images/logo_home.png"></div><div style="padding-left:5px;line-height:1.2em;">'+msg+'</div></div>';d.body.style.margin='0';d.body.innerHTML=html;}}},200);} function get_frame_depth(){var win=self,frame_depth=0;while(win!==win.parent){frame_depth+=1;win=win.parent;} return frame_depth;} function debug(){if(is_debug){console.log(arguments);}} if(self_is_flickr&&self_loc===top_loc){}else if(self_is_offline){}else if(!self_is_flickr&&!self_whitelist_regex.test(self_loc)){should_wipe=true;}else if(bust_image_search&&photo_id&&referrer_is_image_search){should_bust=true;}else if(!referrer_is_whitelisted&&get_frame_depth()>0){should_wipe=true;}else if(!referrer_is_flickr&&get_frame_depth()>1){should_wipe=true;} if(is_debug){debug({self_is_flickr:self_is_flickr,top_loc:top_loc,self_loc:self_loc,referrer:referrer,self_is_offline:self_is_offline,self_is_flickr:self_is_flickr,self_url:self_url,photo_page_re_result:photo_page_re_result,photo_id:photo_id,referrer_is_flickr:referrer_is_flickr,referrer_is_whitelisted:referrer_is_whitelisted,referrer_is_image_search:referrer_is_image_search,self_is_whitelisted:self_whitelist_regex.test(self_loc),frame_depth:get_frame_depth(),faq_url:faq_url,redir_url:redir_url,should_bust:should_bust,should_wipe:should_wipe,base:base});}else{if(should_bust){setTimeout(function(){w.onbeforeunload=w.onunload=null;redirect();},1000);setTimeout(wipe,2000);redirect();}else if(should_wipe){wipe();}else if(referrer_is_whitelisted&&!referrer_is_flickr){base=document.createElement('base');base.target='_top';document.getElementsByTagName('head')[0].appendChild(base);}}
+
+}('We\'re sorry, Flickr <a href="{faq}" target="_top">doesn\'t allow embedding within frames</a>.<br><br>If you\'d like to view this content, <a href="{url}" target="_top">please click here</a>.', 'https://www.flickr.com', true, false));
+
+	</script>
+				<script src="https://s.yimg.com/pw/javascript/iphone.js.v1480980648.37"></script>
+	
+	<script>
+		var F = F || {};
+
+					F.mob_photo_update = true;
+		
+					F.show_smart_banner_android = true;
+		
+		
+		
+		
+		
+		F.iphone = F.iphone || {};
+
+		F.iphone.globals = {
+			flickr_api_uri: 'https://api.flickr.com/services/rest/',
+			intl_lang: 'en-us',
+							loggedin: false,
+						redirected: false								};
+
+					F.showing_app_interstitial = false;
+		
+		F.iphone.format_strs = {
+
+			thou_sep: '',
+			dec_sep: '',
+
+			iphone_recent_uploads: 'Recent uploads',
+			iphone_contact_list: 'People you follow',
+			iphone_your_photostream: 'Your photostream',
+			iphone_more: 'More...',
+
+			edit_photo_confirmation: 'Title and description set',
+			delete_photo_confirmation: 'Photo deleted',
+			edit_photo_license_confirmation: 'License set',
+			edit_photo_privacy_confirmation: 'Photo privacy set',
+			edit_photo_safety_confirmation: 'Safety level set',
+
+			add_comment_confirmation: 'Comment added',
+			edit_comment_confirmation: 'Comment edited',
+			delete_comment_confirmation: 'Comment deleted',
+
+			change_relationship_confirmation: 'Relationship changed',
+
+			upload_confirmation: 'Upload successful',
+
+			no_connection_message: "Can't connect to flickr.com",
+
+			contact_list_friend_and_family: 'Friend&nbsp;and&nbsp;Family',
+			contact_list_friend: 'Friend',
+			contact_list_family: 'Family',
+			contact_list_contact: 'Following',
+							report_abuse_magic_field_empty: 'You forgot to fill in the magic flickr field. We really must insist!',
+				report_abuse_magic_field_incorrect: 'Hrm. You entered the wrong phrase in the magic flickr field. We really must insist!',
+				report_abuse_email_empty: 'You need to tell us your email address to report abuse.',
+						contact_list_item: 'item',
+			contact_list_items: 'items',
+
+			spam_url_warning: 'Description not saved; spam URL detected.',
+
+			group_invite_accept_confirmation_photo: 'Photo added to group',
+			group_invite_accept_confirmation_video: 'Video added to group',
+			group_invite_decline_confirmation: 'Invititation declined',
+
+			get_the_app: 'Get the App',
+			app_is_here: 'Smile. The all new <img class="logo" alt="Flickr" src="/images/flickr-logo-inline.png"/> iPhone app is here.'
+
+		};
+
+		F.iphone.urls = {
+			domain: 'https://m.flickr.com',
+			base: '/',
+			you_photostream: '/photos//',
+			contacts_uploads: '/people/',
+			contacts_list: '/people/contacts/',
+			photostream_base: '/photos/',
+			contact_search_base: '/search/advanced?contacts_only=true&w=people&q='
+		};
+	</script>
+
+	
+</head>
+<body class="en-us loggedout mob_2014">
+
+	<div id="beacon"><img src="https://geo.yahoo.com/f?s=954010545&t=b22c1a32586949e80080df498d89eeb6&r=https%3A%2F%2Fm.flickr.com%2F&fl_ev=0&lang=en&intl=nl" width="0" height="0" alt="" /></div>
+	
+	
+
+	<div id="header" class="toolbar mob_2014">
+		<div id="header-top">
+			<div id="logo">
+									<h1><a href="https://www.flickr.com" id="logo-link" title="Home"></a></h1>
+											</div>
+
+			
+				<ul id="nav_main">
+					
+					<li id="explore-tab"><a href="/explore/interesting/">Explore</a></li>
+					<li id="nearby-tab"><a href="/nearby/" type="nav">Nearby</a></li>
+					<li id="search-tab"><a href="#search" type="nav">Search</a></li>
+					<li id="signin" class="last"><a href="/signin/" type="signin">Sign In</a></li>
+									</ul>
+
+			
+		</div>
+
+					<ul id="nav_sub"></ul>
+		
+		<div id="large-loader">Loading...</div>
+
+		<div id="msg" class="msg">
+			<p id="msg-p"></p>
+			<span></span>
+			<a href="#" class="close" type="hide_message"><span></span></a>
+		</div>
+	</div>
+
+ 	
+	
+	<div id="home" tab="welcome" class="hide-sub-nav" spaceid="954010550">
+
+		<div>
+
+	
+			<div id="home-top">
+
+	
+			<style type="text/css">
+				
+
+					html {
+						background-color: #212124;
+					}
+
+					.loggedout #home-top {
+						/* vertical align tweak for new nav */
+						margin-top: -4px;
+					}
+
+					/* remove extra padding for 2014 SOHP */
+					#home > div:not(.footer) {
+						padding: 0px;
+					}
+
+					.footer {
+						padding-top: 15px;
+					}
+
+					#home-app-v3 {
+						position: relative;
+						background: #212124 url(https://s.yimg.com/pw/images/sohp_2014/trees_superblur.jpg);
+						background-position: 50% 100%;
+						background-size: cover;
+						background-repeat: no-repeat;
+						font-family: "Proxima Nova", "Helvetica Neue", helvetica, verdana, arial, sans-serif;
+						font-size: 20px;
+						color: #fff;
+						font-weight: 400;
+						padding: 20px 0px 0px 0px;
+						text-align: center;
+					}
+
+					#home-app-v3 h1,
+					#home-app-v3 h2 {
+						font-weight: 400;
+						color: #fff;
+					}
+
+					#home-app-v3 h1 {
+						font-size: 28px;
+						font-weight: 300;
+						letter-spacing: 1px;
+					}
+
+					#home-app-v3 h2 {
+						font-weight: 300;
+						font-size: 15px;
+						letter-spacing: 1px;
+						margin-top: 3px;
+					}
+
+					#home-app-v3 ul {
+						margin: 15px 0px 15px 0px;
+					}
+
+					#home-app-v3 li {
+						padding: 10px 0px 10px 0px;
+					}
+
+					#home-app-v3 li,
+					#home-app-v3 li img,
+					#home-app-v3 li em,
+					#home-app-v3 li span {
+						vertical-align: top;
+					}
+
+					#home-app-v3 li,
+					#home-app-v3 li em,
+					#home-app-v3 li span {
+						min-height: 39px;
+					}
+
+					#home-app-v3 li span {
+						/* icon */
+						display: inline-block;
+						width: 80px;
+						text-align: center;
+					}
+
+					#home-app-v3 li em {
+						display: inline-block;
+						font-size: 16px;
+						line-height: 18px;
+						font-style: normal;
+						width: 11em;
+						text-align: left;
+						font-weight: 300;
+						letter-spacing: 1px;
+					}
+
+					#home-app-v3 .cta {
+						display: inline-block;
+						color: #fff;
+						background: rgb(4,143,217);
+						font-size: 18px;
+						margin: 0px auto;
+						padding: 0.6em 1em;
+						text-align: center;
+						border-radius: 2px;
+						min-width: 240px;
+						max-width: 480px;
+					}
+
+					#home-app-v3 .mobile-device-wrapper {
+						margin-top: 45px;
+						margin-bottom: 20px;
+					}
+
+					#home-app-v3 .mobile-device {
+						position: relative;
+						display: inline-block;
+					}
+
+					#home-app-v3 .mobile-device,
+					#home-app-v3 .mobile-screenshot {
+						background-position: 0px 0px;
+						background-size: contain;
+						background-repeat: no-repeat;
+					}
+
+					#home-app-v3 .mobile-screenshot {
+						position: absolute;
+					}
+
+					#home-app-v3 .mobile-device.iphone {
+						width: 195px;
+						height: 409px;
+						background-image: url(https://s.yimg.com/pw/images/iphone/mobile-app-v3-iphone.png.v2);
+					}
+
+					#home-app-v3 .mobile-device.iphone .mobile-screenshot {
+						background-image: url(https://s.yimg.com/pw/images/iphone/mobile-app-v3-ios-screenshot.jpg.v2);
+						width: 163px;
+						height: 289px;
+						top: 61px;
+						left: 17px;
+					}
+
+					#home-app-v3 .mobile-device.android {
+						width: 210px;
+						height: 414px;
+						background-image: url(https://s.yimg.com/pw/images/iphone/mobile-app-v3-nexus5.png);
+					}
+
+					#home-app-v3 .mobile-device.android .mobile-screenshot {
+						background-image: url(https://s.yimg.com/pw/images/iphone/mobile-app-v3-android-screenshot.jpg);
+						width: 189px;
+						height: 336px;
+						top: 36px;
+						left: 10px;
+					}
+
+					#home-app-v3 .app-footer {
+						background-color: #212124;
+						text-align: center;
+						font-size: 12px;
+					}
+
+					#home-app-v3 .app-footer p {
+						min-width: 240px;
+						max-width: 480px;
+						margin: 0px auto;
+						display: inline-block;
+						padding: 1em;
+					}
+
+					#home-app-v3 .app-footer p a {
+						color: #fff;
+					}
+
+				
+			</style>
+
+				<!-- mobile app V3 launch -->
+
+				<div id="home-app-v3">
+
+					<h1>Inspiring photography.</h1>
+					<h2>Introducing the all new Flickr app.</h2>
+
+					<ul>
+
+						<li>
+							<span><img src="https://s.yimg.com/pw/images/sohp_2014/group_icon_small.png" width="44" height="39" /></span><em>Share and connect with the Flickr Community.</em>
+						</li>
+
+						<li>
+							<span><img src="https://s.yimg.com/pw/images/sohp_2014/camera_icon_small.png" width="37" height="37" /></span><em>Stunning photos made easy.</em>
+						</li>
+
+						<li>
+							<span><img src="https://s.yimg.com/pw/images/sohp_2014/album_icon_small.png" width="36" height="32" style="padding-top:3px" /></span><em><em style="width:8em">All your pictures in one place.</em></em>
+						</li>
+
+					</ul>
+
+					
+					<div>
+											<a href="https://itunes.apple.com/us/app/flickr/id328407587?ls=1&mt=8" class="cta">Get the new Flickr App</a>
+										</div>
+
+					<div class="mobile-device-wrapper">
+
+						<div class="mobile-device iphone">
+							<div class="mobile-screenshot"></div>
+						</div>
+
+					</div>
+
+					<div class="app-footer">
+
+						<p>
+							<a href="http://www.yahoo.com/" target="external">From Yahoo</a> &nbsp;
+							<a href="https://www.flickr.com/help/privacy-policy/" target="external">Your Privacy</a> &nbsp;
+							<a href="https://www.flickr.com/help/terms/" target="external">Terms of Use</a> &nbsp; 
+							<a href="https://www.flickr.com/" target="js" onclick="return F.iphone.setAllowWWWCookie();">flickr.com</a>
+							
+						</p>
+
+					</div>
+
+				</div>
+
+			</div>
+
+	
+		</div>
+
+	</div>
+	
+
+	
+	<div id="search" tab="search" class="hide-sub-nav" spaceid="">
+		<form id="main-search-form" action="/search/advanced" method="GET">
+
+			<h2>Search Flickr</h2>
+
+			<input type="text" value="" id="search-field" class="search-field" name="q" autocorrect="off" autocapitalize="off" onfocus="F.iphone.setSearchFields(this);" onkeyup="F.iphone.setSearchFields(this);" onchange="F.iphone.setSearchFields(this);">
+
+			<select name="w" class="who" onchange="F.iphone.setSearchUI(this);">
+				<option value="all">Everyone's Uploads</option>
+				<option value="people">People</option>
+			</select>
+			
+			<a href="#" type="js" onclick="F.iphone.showAdvSearch(); return false;" id="adv-search-toggle">More options...</a>
+			
+			<div id="adv-search-options">
+		  	        <h4>SafeSearch</h4>
+
+		    		<input type="radio" name="ss" id="safe_search_0" value="0" checked> <label for="safe_search_0">SafeSearch on</label><br>
+				<input type="radio" name="ss" id="safe_search_1" value="1"> <label for="safe_search_1">SafeSearch moderate</label><br>
+				<input type="radio" name="ss" id="safe_search_2" value="2"> <label for="safe_search_2">SafeSearch off</label>
+	
+				<h4>Search by content type</h4>
+
+				<input type="checkbox" name="prefs_photos" id="prefs_photos" value="1"> <label for="prefs_photos">Photos / Videos</label><br>
+				<input type="checkbox" name="prefs_screenshots" id="prefs_screenshots" value="1"> <label for="prefs_screenshots">Screenshots / Screencasts</label><br>
+				<input type="checkbox" name="prefs_other" id="prefs_other" value="1"> <label for="prefs_other">Illustration/Art / Animation/CGI</label><br>
+		
+				<h4>Search by media type</h4>
+
+				<input type="radio" name="mt" id="media_all" value="all" checked> <label for="media_all">Photos &amp; Videos</label><br>
+				<input type="radio" name="mt" id="media_photos" value="photos"> <label for="media_photos">Only Photos</label><br>
+				<input type="radio" name="mt" id="media_videos" value="videos"> <label for="media_videos">Only Videos</label>		
+			</div>
+
+			<input class="Butt form-submit" id="search-submit" type="submit" value="SEARCH">
+		</form>
+	</div>
+
+	<div id="404" class="content hide-sub-nav page-not-found" spaceid="">
+		<p class="first">
+			<span class="warning-icon"></span>Page not found. Sorry :(
+		</p>
+	</div>
+
+		<div id="iosauthlogout" class="content hide-sub-nav page-not-found" spaceid="954010550">
+		<div class="loggedout" style="text-align:center">
+			You are now signed out of Flickr.
+		</div>
+	</div>
+
+	
+		<div id="footer">
+
+				<div id="signedin"></div>
+		
+		<p>Copyright &copy; 2016 Yahoo!. All rights reserved.</p>
+				<p class="plain footer-links"><a href="http://www.yahoo.com/" target="external">From Yahoo</a> | <a href="https://www.flickr.com/help/privacy-policy/" target="external">Your Privacy</a> | <a href="https://www.flickr.com/help/terms/" target="external">Terms of Use</a></p>
+		<p class="footer-links"><a href="https://www.flickr.com/" target="js" onclick="return F.iphone.setAllowWWWCookie();">flickr.com</a> | <a class="report-abuse" href="/abuse/" type="report_abuse">Report Abuse</a> | <a href="/signin/" type="signin">Sign In</a></p>
+				 
+	</div>
+	
+<div id="page-gen">
+<!-- page generated by www341 (in bf1) at 04:46:27 01/17/16 in 193ms -->
+</div>	
+
+<div class="photo-page hide-sub-nav" rel-canonical="https://www.flickr.com/photos/tkurpershoek/23789920103/" spaceid="954010555">
+
+
+			<p class="photo-owner">
+	<img src="https://farm9.staticflickr.com/8613/buddyicons/101564884@N06.jpg?1426645850#101564884@N06" width="30" height="30" alt="" class="BuddyIconX">
+
+				
+	<a href="/photos/tkurpershoek/">Thijs Kurpershoek</a>
+	</p>
+			
+	<div class="photo-main">
+
+		<div class="photo_top_container">
+						
+
+		
+		
+				
+	
+
+	
+				
+
+<div class="photo_container pc_m  mob_2014 landscape" style="height: 911px;">
+ 
+	
+		
+	
+	
+	
+		<span class="main_photo_overlay"></span>
+
+					<img class="photo_img" src="https://farm2.staticflickr.com/1682/23789920103_639ee40172_k.jpg" alt="" width="1366" height="911">
+		
+	
+	
+		
+	
+	
+	
+		
+				<a class="next" href="/photos/tkurpershoek/24121097210/in/set-72157663023334870/"><i></i></a>
+		
+				<a class="prev" href="/photos/tkurpershoek/24121095760/in/set-72157663023334870/"><i></i></a>
+		
+		
+		<div class="loading-balls hidden">
+			<div class="html5-balls"><span class="blueball"></span><span class="pinkball"></span></div>
+			<div class="balls-shim"></div>
+		</div>
+
+	
+</div>
+			<div class="photo_meta mob_2014">
+
+				
+				<div class="mobile-app-social">
+										<span class="photo_faves_count"><span class="photo_faves_num">1</span> Fave</span>
+
+					<div class="mobile-toggles">
+																	</div>
+				</div>
+
+				
+				<h2>
+									BandjesKafee_057_TKurpershoek_DSC07981
+								</h2>
+				<p class="description"></p>
+				<p class="copyright">
+
+					<span class="privacy">
+							</span>
+
+		    					<span class="license">
+						<img src="https://s.yimg.com/pw/images/icon_all_rights.gif" height="15" width="15" style="vertical-align: bottom"> 					</span>
+		
+							<a href="/photos/tkurpershoek/23789920103/meta/in/set-72157663023334870/">View more info about this photo...</a>
+						</p>
+			</div>
+		</div>
+
+	
+		
+	
+				<div class="photo_comments mob_2014">
+
+							
+			
+			
+			
+		
+		
+		
+	
+		
+	
+		</div>
+	</div>
+
+		
+	<div class="photo-contextstrip">
+		<div class="photo-contextstrip-wrapper">
+
+			<h3>Thijs Kurpershoek's Photostream</h3>
+			<ul class="photostrip">
+											<li>
+						<span class="photo_container pc_s"><a data-track="thumb" href="/photos/tkurpershoek/23788484624/" title="BandjesKafee_107_TKurpershoek_DSC08146 by Tkurpershoek" ><img src="https://farm2.staticflickr.com/1469/23788484624_d4cb17f7d5_s.jpg" width="75" height="75" alt="BandjesKafee_107_TKurpershoek_DSC08146 by Tkurpershoek"  class="pc_img" border="0" /></a></span>
+						</li>
+											<li>
+						<span class="photo_container pc_s"><a data-track="thumb" href="/photos/tkurpershoek/24390456096/" title="BandjesKafee_106_TKurpershoek_DSC08144 by Tkurpershoek" ><img src="https://farm2.staticflickr.com/1642/24390456096_36e59c64d4_s.jpg" width="75" height="75" alt="BandjesKafee_106_TKurpershoek_DSC08144 by Tkurpershoek"  class="pc_img" border="0" /></a></span>
+						</li>
+											<li>
+						<span class="photo_container pc_s"><a data-track="thumb" href="/photos/tkurpershoek/24048872179/" title="BandjesKafee_105_TKurpershoek_DSC08141 by Tkurpershoek" ><img src="https://farm2.staticflickr.com/1520/24048872179_b6183385dd_s.jpg" width="75" height="75" alt="BandjesKafee_105_TKurpershoek_DSC08141 by Tkurpershoek"  class="pc_img" border="0" /></a></span>
+						</li>
+											<li>
+						<span class="photo_container pc_s"><a data-track="thumb" href="/photos/tkurpershoek/23789894243/" title="BandjesKafee_104_TKurpershoek_DSC08139 by Tkurpershoek" ><img src="https://farm2.staticflickr.com/1634/23789894243_ef90eaa60a_s.jpg" width="75" height="75" alt="BandjesKafee_104_TKurpershoek_DSC08139 by Tkurpershoek"  class="pc_img" border="0" /></a></span>
+						</li>
+											<li>
+						<span class="photo_container pc_s"><a data-track="thumb" href="/photos/tkurpershoek/24334219361/" title="BandjesKafee_103_TKurpershoek_DSC08137 by Tkurpershoek" ><img src="https://farm2.staticflickr.com/1470/24334219361_e0043a9121_s.jpg" width="75" height="75" alt="BandjesKafee_103_TKurpershoek_DSC08137 by Tkurpershoek"  class="pc_img" border="0" /></a></span>
+						</li>
+											<li>
+						<span class="photo_container pc_s"><a data-track="thumb" href="/photos/tkurpershoek/23789895193/" title="BandjesKafee_102_TKurpershoek_DSC08133 by Tkurpershoek" ><img src="https://farm2.staticflickr.com/1473/23789895193_7b5fd9660f_s.jpg" width="75" height="75" alt="BandjesKafee_102_TKurpershoek_DSC08133 by Tkurpershoek"  class="pc_img" border="0" /></a></span>
+						</li>
+											<li>
+						<span class="photo_container pc_s"><a data-track="thumb" href="/photos/tkurpershoek/24308429602/" title="BandjesKafee_101_TKurpershoek_DSC08128 by Tkurpershoek" ><img src="https://farm2.staticflickr.com/1533/24308429602_1e2a321330_s.jpg" width="75" height="75" alt="BandjesKafee_101_TKurpershoek_DSC08128 by Tkurpershoek"  class="pc_img" border="0" /></a></span>
+						</li>
+											<li>
+						<span class="photo_container pc_s"><a data-track="thumb" href="/photos/tkurpershoek/24334220801/" title="BandjesKafee_100_TKurpershoek_DSC08125 by Tkurpershoek" ><img src="https://farm2.staticflickr.com/1702/24334220801_b69cab0846_s.jpg" width="75" height="75" alt="BandjesKafee_100_TKurpershoek_DSC08125 by Tkurpershoek"  class="pc_img" border="0" /></a></span>
+						</li>
+								</ul>
+
+		</div>
+	</div>
+
+	<div class="photo-contextstrip">
+		<div class="photo-contextstrip-wrapper">
+			<h3>Explore</h3>
+			<ul class="photostrip">
+					<li>
+				<a href="/photos/48988488@N04/24384613926/in/explore-1452948387/">
+					<span class="img_block photo_container pc_iphone_list">
+						<span class="loading-overlay"></span>															<img src="https://farm2.staticflickr.com/1526/24384613926_e10b00707e_s.jpg" width="75" height="75" alt="" class="pc_img">
+																				</span>
+				</a>
+			</li>
+					<li>
+				<a href="/photos/peterbrannon/24416080325/in/explore-1452948387/">
+					<span class="img_block photo_container pc_iphone_list">
+						<span class="loading-overlay"></span>															<img src="https://farm2.staticflickr.com/1700/24416080325_ca3a9b87a4_s.jpg" width="75" height="75" alt="" class="pc_img">
+																				</span>
+				</a>
+			</li>
+					<li>
+				<a href="/photos/johnormerod/24392121676/in/explore-1452948387/">
+					<span class="img_block photo_container pc_iphone_list">
+						<span class="loading-overlay"></span>															<img src="https://farm2.staticflickr.com/1655/24392121676_f2ebc3d9b2_s.jpg" width="75" height="75" alt="" class="pc_img">
+																				</span>
+				</a>
+			</li>
+					<li>
+				<a href="/photos/abasa/23794978424/in/explore-1452948387/">
+					<span class="img_block photo_container pc_iphone_list">
+						<span class="loading-overlay"></span>															<img src="https://farm2.staticflickr.com/1573/23794978424_a2a7314478_s.jpg" width="75" height="75" alt="" class="pc_img">
+																				</span>
+				</a>
+			</li>
+					<li>
+				<a href="/photos/fvdvpics/23787360803/in/explore-1452948387/">
+					<span class="img_block photo_container pc_iphone_list">
+						<span class="loading-overlay"></span>															<img src="https://farm2.staticflickr.com/1706/23787360803_748afd4b14_s.jpg" width="75" height="75" alt="" class="pc_img">
+																				</span>
+				</a>
+			</li>
+					<li>
+				<a href="/photos/amstermarc/24118704290/in/explore-1452948387/">
+					<span class="img_block photo_container pc_iphone_list">
+						<span class="loading-overlay"></span>															<img src="https://farm2.staticflickr.com/1670/24118704290_053a12bbd7_s.jpg" width="75" height="75" alt="" class="pc_img">
+																				</span>
+				</a>
+			</li>
+					<li>
+				<a href="/photos/davidmarriottsydney/24385655986/in/explore-1452948387/">
+					<span class="img_block photo_container pc_iphone_list">
+						<span class="loading-overlay"></span>															<img src="https://farm2.staticflickr.com/1509/24385655986_f491c40327_s.jpg" width="75" height="75" alt="" class="pc_img">
+																				</span>
+				</a>
+			</li>
+					<li>
+				<a href="/photos/salman2000/24410640575/in/explore-1452948387/">
+					<span class="img_block photo_container pc_iphone_list">
+						<span class="loading-overlay"></span>															<img src="https://farm2.staticflickr.com/1686/24410640575_eb2d1fc7a1_s.jpg" width="75" height="75" alt="" class="pc_img">
+																				</span>
+				</a>
+			</li>
+					</ul>
+		</div>
+	</div>
+
+
+</div>
+
+
+	
+		
+		
+		</body>
+
+		
+				</html>
+	
